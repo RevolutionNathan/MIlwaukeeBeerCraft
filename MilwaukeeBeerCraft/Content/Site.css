@@ -1,0 +1,73 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: Arial;
+    color: #822c07!important;
+   
+}
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-inverse li a, .navbar-text, .navbar, .navbar-brand, .navbar-default-color, .nav, .navbar-nav, .navbar-default, .navbar-fixed-top, .navbar-header li a {
+    background-color: #f7e7ca !important;
+    color:#822c07!important;
+    border: #f7e7ca;
+
+}
+.navbar-inverse li a:hover, .navbar-brand:focus {
+    color: #381803 !important;
+}
+.navbar-header li a{
+    color: #381803 !important;
+}
+.navbar-brand li a:hover, navbar-brand:focus{
+     color: #381803 !important;
+}
+.navbar-collapse{
+    background-color: #f7e7ca !important;
+     color: #f7e7ca !important;
+     border: #f7e7ca;
+}
+.navbar-right{
+    background-color: #f7e7ca !important;
+    color: #f7e7ca !important;
+     border: #f7e7ca;
+}
+.navbar-right li a:hover{
+    background-color: #f7e7ca !important;
+    color: #381803 !important;
+}
+
+.imageAndText {
+	position: relative;
+}    			
+.imageAndText .col {
+	position: absolute; z-index: 1; top: 0%; left: 0%;
+}
+
+h1{
+    font-size: 9vw;
+    color: cornsilk;
+    font-weight:400;
+    text-align: center; 
+    text-shadow: 5px #822c07 !important;
+}
