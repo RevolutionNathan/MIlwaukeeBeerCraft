@@ -1,0 +1,58 @@
+﻿@model MilwaukeeBeerCraft.Models.Post
+
+<div class="post">
+    <div class="post-meta">
+        <div class="row">
+
+            <!--Heading-->
+            <div class="post-title">
+                <h2>@Html.PostLink(Model)</h2>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <!--Category-->
+            <div class="post-category">
+                <span>Category: </span>@Html.CategoryLink(Model.Category)
+            </div>
+
+            <!--Beers-->
+            @*<div class="post-beers"> m
+                <span>Beers:</span>@Helpers.Beers(Html, Model.Beers)
+            </div>*@
+
+            <!--Breweries -->
+            @*<div class="post-breweriess">
+                <span>Beers:</span>@Helpers.Brewery(Html, Model.Brewery)
+            </div>*@
+
+            <!--Posted date-->
+            <div class="posted-date">
+                @Model.PostedOn.ToConfigLocalTime()
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--Short Description-->
+    <div class="post-body">
+        @Html.Raw(Model.Description)
+    </div>
+
+    <div class="post-foot">
+        @Html.ActionLink("continue...", "post", "blog",
+        new
+        {
+            year = Model.PostedOn.Year,
+            month = Model.PostedOn.Month,
+            day = Model.PostedOn.Day,
+            title = Model.Title
+        },
+        new { title = "continue..." }
+    )
+    </div>
+</div>
+

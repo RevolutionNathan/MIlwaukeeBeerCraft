@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MilwaukeeBeerCraft.App_Code
+{
+	public class Helpers
+	{
+        @helper Category(System.Web.Mvc.HtmlHelper htmlHelper,
+            IList<MilwaukeeBeerCraft.Models.Category> categories)
+        {
+            foreach (var category in categories)
+            {
+                <div class="tags-div">
+                    @MilwaukeeBeerCraft.ActionLinkExtensions.CategoryLink(htmlHelper, category)
+                </div>
+            }
+        }
+        @helper Beers(System.Web.Mvc.HtmlHelper htmlHelper,
+            IList<MilwaukeeBeerCraft.Models.Beers> Beers)
+        {
+        foreach (var beer in Beers)
+        {
+                        <div class="tags-div">
+                            @MilwaukeeBeerCraft.ActionLinkExtensions.BeerLink(htmlHelper, beer)
+                        </div>
+            }
+        }
+        @helper Brewery(System.Web.Mvc.HtmlHelper htmlHelper,
+            IList<MilwaukeeBeerCraft.Models.Brewery> Breweries)
+        {
+            foreach (var brewery in Breweries)
+            {
+                <div class="tags-div">
+                    @MilwaukeeBeerCraft.ActionLinkExtensions.BreweryLink(htmlHelper, brewery)
+                </div>
+            }
+        }
+	}
+}

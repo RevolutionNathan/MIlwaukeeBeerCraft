@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MilwaukeeBeerCraft;
+using Ninject;
+using Ninject.Web.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,14 +11,26 @@ using System.Web.Routing;
 
 namespace MilwaukeeBeerCraft
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : NinjectHttpApplication
     {
-        protected void Application_Start()
+       
+        protected override IKernel CreateKernel()
         {
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            var kernel = new StandardKernel();
+
+            kernel.Load(new RepositoryModule());
+            kernel.Bind<BlogRepository>().To<BlogRepository>();
+
+            return kernel;
+        }
+
+        protected override void OnApplicationStarted()
+        {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            base.OnApplicationStarted();
         }
+
     }
 }

@@ -10,6 +10,14 @@ namespace MilwaukeeBeerCraft.Controllers
     {
         public ActionResult Index()
         {
+            if (User.IsInRole( "Owner"))
+            {
+                return RedirectToAction("Index", "Owner");
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
             return View();
         }
 

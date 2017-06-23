@@ -5,10 +5,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MilwaukeeBeerCraft.Models;
+using System.Collections.Generic;
 
 namespace MilwaukeeBeerCraft.Controllers
 {
@@ -20,6 +22,7 @@ namespace MilwaukeeBeerCraft.Controllers
 
         public AccountController()
         {
+            ApplicationDbContext context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -60,7 +63,7 @@ namespace MilwaukeeBeerCraft.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+        
         //
         // POST: /Account/Login
         [HttpPost]
@@ -139,6 +142,8 @@ namespace MilwaukeeBeerCraft.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ApplicationDbContext context = new ApplicationDbContext();
+            ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
             return View();
         }
 
@@ -149,6 +154,7 @@ namespace MilwaukeeBeerCraft.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            ApplicationDbContext context = new ApplicationDbContext();
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -156,15 +162,16 @@ namespace MilwaukeeBeerCraft.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                    return RedirectToAction("Register", "Account");
                 }
+                ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
                 AddErrors(result);
             }
 
@@ -480,6 +487,33 @@ namespace MilwaukeeBeerCraft.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
+        [ChildActionOnly]
+        public ActionResult AdminUsers()
+        {
+            List<AdminUsersRoleModel> AdminUsers = new List<AdminUsersRoleModel>();
+            var users = new ApplicationDbContext().Users.ToList();
+            foreach (var user in users)
+            {
+                AdminUsers.Add(new AdminUsersRoleModel() { UserName = user.UserName, Role = UserManager.GetRoles(user.Id).Count > 0 ? UserManager.GetRoles(user.Id).Aggregate((a, b) => a + "/" + b) : "None" });
+            }
+            return View(new ApplicationDbContext().Users.ToList());
+        }
+        
+        public ActionResult Delete(string id)
+        {
+
+            List<ApplicationUser> users = new List<ApplicationUser>();
+            ApplicationDbContext context = new ApplicationDbContext();
+            var user = context.Users.SingleOrDefault(c => c.Id == id);
+            context.Users.Remove(user);
+            context.SaveChanges();
+            return RedirectToAction("Register", "Account");
+        }
+        //protected void EditUser(object sender, EventArgs e)
+        //{
+
+        //}
         #endregion
     }
 }

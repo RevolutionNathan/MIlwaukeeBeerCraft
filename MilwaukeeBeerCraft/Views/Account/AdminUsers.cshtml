@@ -1,0 +1,22 @@
+﻿@model IEnumerable<MilwaukeeBeerCraft.Models.ApplicationUser>
+<h4>Current Users:</h4>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th> Email </th>
+            <th> Role </th>
+            <th> Action </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Admin in Model)
+        {
+            <tr>
+                <td>@Admin.Email</td>
+                <td>@Admin.Roles</td>
+                <td>@Html.ActionLink(Admin.Id, "Delete", new { id = Admin.Id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

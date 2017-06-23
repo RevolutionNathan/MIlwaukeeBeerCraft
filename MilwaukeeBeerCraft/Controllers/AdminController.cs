@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MilwaukeeBeerCraft.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         // GET: Admin
@@ -13,7 +14,14 @@ namespace MilwaukeeBeerCraft.Controllers
         {
             return View();
         }
-       
+        public ActionResult ManageContent()
+        {
+
+            return View();
+        }
+
+
+
 
     }
 }
