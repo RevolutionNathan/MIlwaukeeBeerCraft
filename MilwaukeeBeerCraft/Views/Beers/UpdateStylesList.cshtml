@@ -1,0 +1,36 @@
+﻿ @model List<MilwaukeeBeerCraft.Models.BeersByStyleViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            Style
+        </th>
+        <th>
+            Slug
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            ABV
+        </th>
+        <th>
+            IBU
+        </th>
+       
+        <th>
+            Rating
+        </th>
+    </tr>
+
+    @foreach (var beer in Model)
+    {
+        <tr>
+            <td> beer.beer_style </td>
+            <td> beer.beer_slug </td>
+            <td> beer.beer_name </td>
+            <td> beer.beer_abv </td>
+            <td> beer.beer_ibu </td>
+            <td> beer.beer_rating </td>
+        </tr>
+    }

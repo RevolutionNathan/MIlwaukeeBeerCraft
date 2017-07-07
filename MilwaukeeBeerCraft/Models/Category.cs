@@ -10,13 +10,13 @@ namespace MilwaukeeBeerCraft.Models
         { get; set; }
         public virtual string UrlSlug
         { get; set; }
-        public virtual bool Beer
+        public virtual string Beer
         { get; set; }
-        public virtual bool Brewery
+        public virtual string Brewery
         { get; set; }
-        public virtual bool Event
+        public virtual string Event
         { get; set; }
-        public virtual bool People
+        public virtual string People
         { get; set; }
         public virtual ICollection<Post> Posts
         { get; set; }

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MilwaukeeBeerCraft.Models;
 
 namespace MilwaukeeBeerCraft.Models
 {
@@ -20,6 +21,43 @@ namespace MilwaukeeBeerCraft.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<BeerListObject> BeerListObject
+        { get; set; }
+        public DbSet<BeerStyles> BeerStyles
+        { get; set; }
+        public DbSet<Category> Category
+        { get; set; }
+        public DbSet<ListOfBeerLists> ListOfBeerLists
+        { get; set; }
+        public DbSet<MilwaukeeBreweries> MilwaukeeBreweries
+        { get; set; }
+        public DbSet<Post> Post
+        { get; set; }
+
+        public DbSet<UntappedBrewery> UntappedBrewery
+        { get; set; }
+        public DbSet<ResponseTime> ResponseTime
+        { get; set; }
+        public DbSet<InitTime> InitTime
+        { get; set; }
+        public DbSet<Meta> Meta
+        { get; set; }
+        public DbSet<Beer> Beer
+        { get; set; }
+        public DbSet<Contact> Contact
+        { get; set; }
+        public DbSet<Location> Location
+        {get; set;}
+        public DbSet<Brewery> Brewery
+        { get; set; }
+        public DbSet<Item> Item
+        { get; set; }
+        public DbSet<Beers> Beers
+        { get; set; }
+        public DbSet<Response> Response
+        { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

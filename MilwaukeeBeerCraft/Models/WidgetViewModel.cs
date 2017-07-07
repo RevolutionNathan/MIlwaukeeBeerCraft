@@ -17,8 +17,8 @@ namespace MilwaukeeBeerCraft.Models
         }
 
         public IList<Category> Categories { get; private set; }
-        public IList<Beers> Beers { get; private set; }
-        public IList<Brewery> Brewery { get; private set; }
+        public IList<BeerStyles> Beers { get; private set; }
+        public IList<MilwaukeeBreweries> Brewery { get; private set; }
 
 
     }

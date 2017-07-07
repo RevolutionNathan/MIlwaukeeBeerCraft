@@ -1,7 +1,21 @@
 ﻿
+
 @{
     ViewBag.Title = "Index";
 }
 
 @Html.Partial("BeersHeadImage")
+
+<div class="col-sm-6">
+    @Html.Action("StyleSelector")
+</div>
+<div class="=col-sm-6">
+    @Html.Action("BeerGraphs")
+</div>
+
+
+
+
+
+
 

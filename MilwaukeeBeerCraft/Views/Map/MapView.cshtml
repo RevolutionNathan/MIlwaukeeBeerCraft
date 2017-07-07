@@ -1,0 +1,67 @@
+﻿
+@model IEnumerable<MilwaukeeBeerCraft.Models.MilwaukeeBreweries>
+
+   
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <style>
+        #map {
+            height: 700px;
+            width: 900px;
+            border: 5px solid #697075;
+            border-radius: 10px;
+            /*margin: 50px;
+             padding-top: 30px;*/
+        }
+    </style>
+
+
+
+
+@{
+    Layout = null;
+}
+
+    
+    <center><div id="map"></div></center>
+
+
+<script>
+    var jsonInfo = @Html.Raw(Json.Encode(Model));
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: { lat: 43.036194, lng: -87.904315 }
+            });
+            var infoWindow = new google.maps.InfoWindow();
+            var lat =[];
+            var lng = [];
+            var name = [];
+            var url = [];
+            var description = [];
+            
+            for (var i = 0; i < jsonInfo.length-1; i++)
+            {
+                lat.push(jsonInfo[i].lat);
+                lng.push(jsonInfo[i].lng);
+                name.push(jsonInfo[i].Name);
+                url.push(jsonInfo[i].url);
+                description.push(jsonInfo[i].description);
+               
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat[i],lng[i]),
+                    map: map,
+                });
+              
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function(){
+                        infoWindow.setContent(name[i] + "<br/>" + description[i]+ "<br/>" + url[i]);
+                        infoWindow.open(map, marker);
+                    }
+                   
+                })(marker, i));
+            }
+        }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCocAVw75KogJqYuj33HsxY9b3DVY9TdDg&callback=initMap"
+        async defer></script>

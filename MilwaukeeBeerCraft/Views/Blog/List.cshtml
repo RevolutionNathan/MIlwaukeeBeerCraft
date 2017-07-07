@@ -1,33 +1,16 @@
-﻿@model MilwaukeeBeerCraft.Models.ListViewModel
+﻿@model MilwaukeeBeerCraft.Models.Post
 
 @{
     ViewBag.Title = "Posts";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    Layout = "~/Views/Shared/Layout.cshtml";
 }
 
 <h2>Posts</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Posts
-        </th>
-        <th>
-            Edit
-        </th>
-        <th>
-            Details
-        </th>
-        <th>
-            Delete
-        </th>
-    </tr>
-    @if (Model.Posts.Count > 0)
+
+    @if (Model.Content.Count() > 0)
     {
-        foreach (var post in Model.Posts)
+        foreach (var post in Model.Content)
         {
             <tr>
                 <td> @Html.Partial("_PostTemplate", post)</td>
@@ -43,7 +26,7 @@
 
     @* @Html.DisplayNameFor(model => model.TotalPosts)
 
-        @foreach (var item in Model) {
+        @foreach (var thing in Model) {
         <tr>
 
             <td>

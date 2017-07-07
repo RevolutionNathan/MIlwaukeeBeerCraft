@@ -32,7 +32,7 @@ namespace MilwaukeeBeerCraft
             return _session.Query<Post>()
                   .Where(p => postIds.Contains(p.Id))
                   .OrderByDescending(p => p.PostedOn)
-                  .FetchMany(p => p.Beers)
+                  .FetchMany(p => p.Beer)
                   .ToList();
         }
 
@@ -43,7 +43,7 @@ namespace MilwaukeeBeerCraft
         public IList<Post> PostsForCategory(string categorySlug, int pageNo, int pageSize)
         {
             var posts = _session.Query<Post>()
-                                .Where(p => p.Published && p.Category.UrlSlug.Equals(categorySlug))
+                                .Where(p => p.Published && p.Category.Equals(categorySlug))
                                 .OrderByDescending(p => p.PostedOn)
                                 .Skip(pageNo * pageSize)
                                 .Take(pageSize)
@@ -62,7 +62,7 @@ namespace MilwaukeeBeerCraft
         public int TotalPostsForCategory(string categorySlug)
         {
             return _session.Query<Post>()
-                        .Where(p => p.Published && p.Category.UrlSlug.Equals(categorySlug))
+                        .Where(p => p.Published && p.Category.Equals(categorySlug))
                         .Count();
         }
 
@@ -75,14 +75,14 @@ namespace MilwaukeeBeerCraft
         {
             return _session.Query<Category>().OrderBy(p => p.Name).ToList();
         }
-        public IList<Beers> Beers()
+        public IList<BeerStyles> Beers()
         {
-            return _session.Query<Beers>().OrderBy(p => p.Name).ToList();
+            return _session.Query<BeerStyles>().OrderBy(p => p.Name).ToList();
         }
 
-        public IList<Brewery> Breweries()
+        public IList<MilwaukeeBreweries> Breweries()
         {
-            return _session.Query<Brewery>().OrderBy(p => p.Name).ToList();
+            return _session.Query<MilwaukeeBreweries>().OrderBy(p => p.Name).ToList();
         }
 
         //public IList<Post> PostsForBeer()

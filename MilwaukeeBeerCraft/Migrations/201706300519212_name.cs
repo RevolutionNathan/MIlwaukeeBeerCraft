@@ -3,7 +3,7 @@ namespace MilwaukeeBeerCraft.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class beersbreweriescategories : DbMigration
+    public partial class name : DbMigration
     {
         public override void Up()
         {

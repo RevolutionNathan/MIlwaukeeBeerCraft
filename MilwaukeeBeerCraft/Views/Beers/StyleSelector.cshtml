@@ -1,0 +1,84 @@
+﻿@model List<string>
+<head>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<div id="row">
+    <div id="col-sm-4">
+        <div class="dropdown">
+            @Html.DropDownList("style", new SelectList(Model), new { @id = "selectedStyle" })
+        </div>
+    </div>
+    <div id="col-sm-8">
+
+        <div>
+            <table class="table" id="addBeerRows">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Slug
+                    </th>
+                    <th>
+                        ABV
+                    </th>
+                    <th>
+                        IBU
+                    </th>
+                    <th>
+                        Rating
+                    </th>
+                    <th>
+                        Style
+                    </th>
+                </tr>
+                <tbody>
+                     
+                </tbody>
+               
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+ 
+    $(document).ready(function () {
+        $("#selectedStyle").change(function (e) {
+            var style = $("#selectedStyle option:selected").text();
+            $.ajax({
+                type: "GET",
+                url: "beers/UpdateStylesList",
+                contentType: "application/json",
+                data: {
+                    "beer_style" : style
+                },
+                dataType: "json",
+                success: tableBuilder,
+                error: function (req, status, error) {
+                    console.log(req);
+                }
+            });
+            return false;
+        });
+    });
+
+    function tableBuilder(response) {
+        $('#addBeerRows tbody').empty();
+        $.each(response, function (i, item) {
+            var $tr = $('#addBeerRows').append(
+                $('<tr>'),
+                $('<td>').text(item.name),
+                $('<td>').text(item.slug),
+                $('<td>').text(item.abv),
+                $('<td>').text(item.ibu),
+                $('<td>').text(item.rating),
+                $('<td>').text(item.style),
+                $('</tr>')
+            );
+        });
+    };
+
+</script>

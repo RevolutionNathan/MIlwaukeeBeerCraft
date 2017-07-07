@@ -6,11 +6,19 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using MilwaukeeBeerCraft.Models;
+using System.Security.Claims;
+using System.IdentityModel.Claims;
+using Google.Apis.Auth.OAuth2.Responses;
+using Google.Apis.Util.Store;
+using Google.Apis.Auth.OAuth2;
+using MilwaukeeBeerCraft.App_Start;
 
 namespace MilwaukeeBeerCraft
 {
     public partial class Startup
     {
+        private IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -58,11 +66,40 @@ namespace MilwaukeeBeerCraft
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            // ***
+            // Enables logging in with the Google login provider.
+            var google = new GoogleOAuth2AuthenticationOptions()
+            {
+                AccessType = "offline",     // Request a refresh token.
+                ClientId = MyClientSecrets.ClientId,
+                ClientSecret = MyClientSecrets.ClientSecret,
+                Provider = new GoogleOAuth2AuthenticationProvider()
+                {
+                    OnAuthenticated = async context =>
+                    {
+                        var userId = context.Id;
+                        context.Identity.AddClaim(new System.Security.Claims.Claim(MyClaimTypes.GoogleUserId, userId));
+
+                        var tokenResponse = new TokenResponse()
+                        {
+                            AccessToken = context.AccessToken,
+                            RefreshToken = context.RefreshToken,
+                            ExpiresInSeconds = (long)context.ExpiresIn.Value.TotalSeconds,
+                            Issued = DateTime.Now,
+                        };
+                        
+                        await dataStore.StoreAsync(userId, tokenResponse); 
+                    },
+                },
+            }; 
+
+            foreach (var scope in MyRequestedScopes.Scopes)
+            {
+                google.Scope.Add(scope);
+            }
+
+            app.UseGoogleAuthentication(google);
         }
+    
     }
 }

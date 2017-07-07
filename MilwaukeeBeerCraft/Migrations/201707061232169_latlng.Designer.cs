@@ -7,13 +7,13 @@ namespace MilwaukeeBeerCraft.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class beersbreweriescategories : IMigrationMetadata
+    public sealed partial class latlng : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(beersbreweriescategories));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(latlng));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706211949549_beers, breweries, categories"; }
+            get { return "201707061232169_latlng"; }
         }
         
         string IMigrationMetadata.Source

@@ -52,6 +52,30 @@
       <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.27.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.27.1\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.27.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.27.1\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.27.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.27.1\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Calendar.v3, Version=1.27.1.878, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Calendar.v3.1.27.1.878\lib\net45\Google.Apis.Calendar.v3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.27.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.27.1\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.27.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.27.1\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.2\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
@@ -153,6 +177,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -249,45 +274,93 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MyClaimTypes.cs" />
+    <Compile Include="App_Start\MyClientSecrets.cs" />
+    <Compile Include="App_Start\MyRequestedScopes.cs" />
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Backend\LinqDeserialize.cs" />
+    <Compile Include="Backend\Untapped.cs" />
     <Compile Include="BlogRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\BreweriesController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mapping\BeersMap.cs" />
-    <Compile Include="Mapping\BreweryMap.cs" />
-    <Compile Include="Mapping\CategoryMap.cs" />
-    <Compile Include="Mapping\PostMap.cs" />
-    <Compile Include="Migrations\201706161921462_initial.cs" />
-    <Compile Include="Migrations\201706161921462_initial.Designer.cs">
-      <DependentUpon>201706161921462_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201706281406133_intialModels.cs" />
+    <Compile Include="Migrations\201706281406133_intialModels.Designer.cs">
+      <DependentUpon>201706281406133_intialModels.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706211949549_beers, breweries, categories.cs" />
-    <Compile Include="Migrations\201706211949549_beers, breweries, categories.Designer.cs">
-      <DependentUpon>201706211949549_beers, breweries, categories.cs</DependentUpon>
+    <Compile Include="Migrations\201706292043180_model.cs" />
+    <Compile Include="Migrations\201706292043180_model.Designer.cs">
+      <DependentUpon>201706292043180_model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706300214177_models.cs" />
+    <Compile Include="Migrations\201706300214177_models.Designer.cs">
+      <DependentUpon>201706300214177_models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706300231231_spelling.cs" />
+    <Compile Include="Migrations\201706300231231_spelling.Designer.cs">
+      <DependentUpon>201706300231231_spelling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706300519212_name.cs" />
+    <Compile Include="Migrations\201706300519212_name.Designer.cs">
+      <DependentUpon>201706300519212_name.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707041355462_calendarModels.cs" />
+    <Compile Include="Migrations\201707041355462_calendarModels.Designer.cs">
+      <DependentUpon>201707041355462_calendarModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707051952502_breweriesModel.cs" />
+    <Compile Include="Migrations\201707051952502_breweriesModel.Designer.cs">
+      <DependentUpon>201707051952502_breweriesModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707052003002_BreweryModel.cs" />
+    <Compile Include="Migrations\201707052003002_BreweryModel.Designer.cs">
+      <DependentUpon>201707052003002_BreweryModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707052132249_columnHeaders.cs" />
+    <Compile Include="Migrations\201707052132249_columnHeaders.Designer.cs">
+      <DependentUpon>201707052132249_columnHeaders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707061230253_models1.cs" />
+    <Compile Include="Migrations\201707061230253_models1.Designer.cs">
+      <DependentUpon>201707061230253_models1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707061232169_latlng.cs" />
+    <Compile Include="Migrations\201707061232169_latlng.Designer.cs">
+      <DependentUpon>201707061232169_latlng.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminUsersRoleModel.cs" />
-    <Compile Include="Models\Beers.cs" />
-    <Compile Include="Models\Brewery.cs" />
+    <Compile Include="Models\BeerFromUntapped.cs" />
+    <Compile Include="Models\BeersByStyleViewModel.cs" />
+    <Compile Include="Models\BeerStyles.cs" />
+    <Compile Include="Models\BreweriesByVenue.cs" />
+    <Compile Include="Models\BreweryObject.cs" />
+    <Compile Include="Models\CalendarEventGroup.cs" />
+    <Compile Include="Models\ListOfBeerLists.cs" />
+    <Compile Include="Models\MilwaukeeBreweries.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ListViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\UntappedBrewery.cs" />
+    <Compile Include="Models\UpcomingEventsViewModel.cs" />
+    <Compile Include="Models\VenueNameId.cs" />
     <Compile Include="Models\WidgetViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryModule.cs" />
@@ -337,6 +410,10 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="App_Code\Helpers.cshtml" />
     <Content Include="Content\Themes\jquery-ui-1.12.1.custom\package.json" />
+    <Content Include="Content\client_secret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Controllers\ClientSecret.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -561,6 +638,12 @@
     <Content Include="Views\Shared\_Pager.cshtml" />
     <Content Include="Views\Blog\SubHeadings.cshtml" />
     <Content Include="Views\Shared\LatestPosts.cshtml" />
+    <Content Include="Views\Beers\UpdateStylesList.cshtml" />
+    <Content Include="Views\Beers\StyleSelector.cshtml" />
+    <Content Include="Views\Admin\ManagePosts.cshtml" />
+    <Content Include="Views\Calendar\UpcomingEvents.cshtml" />
+    <Content Include="Views\Map\MapView.cshtml" />
+    <Content Include="Views\Beers\BeerGraphs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -570,11 +653,38 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706161921462_initial.resx">
-      <DependentUpon>201706161921462_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706281406133_intialModels.resx">
+      <DependentUpon>201706281406133_intialModels.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706211949549_beers, breweries, categories.resx">
-      <DependentUpon>201706211949549_beers, breweries, categories.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706292043180_model.resx">
+      <DependentUpon>201706292043180_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706300214177_models.resx">
+      <DependentUpon>201706300214177_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706300231231_spelling.resx">
+      <DependentUpon>201706300231231_spelling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706300519212_name.resx">
+      <DependentUpon>201706300519212_name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707041355462_calendarModels.resx">
+      <DependentUpon>201707041355462_calendarModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707051952502_breweriesModel.resx">
+      <DependentUpon>201707051952502_breweriesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707052003002_BreweryModel.resx">
+      <DependentUpon>201707052003002_BreweryModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707052132249_columnHeaders.resx">
+      <DependentUpon>201707052132249_columnHeaders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707061230253_models1.resx">
+      <DependentUpon>201707061230253_models1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707061232169_latlng.resx">
+      <DependentUpon>201707061232169_latlng.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

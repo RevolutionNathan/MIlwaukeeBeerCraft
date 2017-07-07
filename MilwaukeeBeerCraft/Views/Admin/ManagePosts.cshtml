@@ -1,0 +1,54 @@
+﻿@*@model IEnumerable<MilwaukeeBeerCraft.Models.Post>*@
+<h2>Manage Posts</h2>
+
+<!-- tab control -->
+
+<div id="tabs">
+    <ul>
+        <li>
+            <a href="#tabs-1">Posts</a>
+        </li>
+        <li>
+            <a href="#tabs-2">Categories</a>
+        </li>
+        <li>
+            <a href="#tabs-3">Beers</a>
+        </li>
+        <li>
+            <a href="#tabs-4">Breweries</a>
+        </li>
+    </ul>
+    <div id="tabs-1">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> Date Posted </th>
+                    <th> Title </th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Post in Model)
+                {
+                    <tr>
+                        <td>@Post.PostedOn</td>
+                        <td>@Post.Title</td>
+                        <td>@Html.ActionLink("Delete", "DeletePost", new { id = Post.Id })</td>
+
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+    </div>
+    <div id="tabs-2">
+        <p>Content for Tab 2</p>
+    </div>
+    <div id="tabs-3">
+        <p>Content for Tab 3</p>
+    </div>
+    <div id="tabs-4">
+        <p>Content for Tab 4</p>
+    </div>
+</div>
+<div id="tabid"></div>

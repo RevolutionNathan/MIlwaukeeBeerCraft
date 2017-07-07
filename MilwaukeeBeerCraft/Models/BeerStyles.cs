@@ -5,10 +5,8 @@ using System.Web;
 
 namespace MilwaukeeBeerCraft.Models
 {
-    public class Beers
+    public class BeerStyles
     {
-
-        
 
         public virtual int Id
         { get; set; }
