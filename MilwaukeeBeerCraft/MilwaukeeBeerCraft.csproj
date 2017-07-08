@@ -358,6 +358,8 @@
     <Compile Include="Models\ListViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\StyleCountViewModel.cs" />
+    <Compile Include="Models\StyleRatingViewModel.cs" />
     <Compile Include="Models\UntappedBrewery.cs" />
     <Compile Include="Models\UpcomingEventsViewModel.cs" />
     <Compile Include="Models\VenueNameId.cs" />
@@ -644,6 +646,7 @@
     <Content Include="Views\Calendar\UpcomingEvents.cshtml" />
     <Content Include="Views\Map\MapView.cshtml" />
     <Content Include="Views\Beers\BeerGraphs.cshtml" />
+    <Content Include="Views\Beers\StyleRatings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

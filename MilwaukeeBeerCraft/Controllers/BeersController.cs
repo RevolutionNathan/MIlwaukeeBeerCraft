@@ -66,10 +66,42 @@ namespace MilwaukeeBeerCraft.Controllers
 
         public ActionResult BeerGraphs()
         {
-            Untapped untapped = new Untapped();
-            List<string> stylesList = untapped.GetBeersByStyle();
+            List<StyleCountViewModel> countStyles = new List<StyleCountViewModel>(); 
+            var beersStyleCount = db.Beer;
+           
+            var counts = beersStyleCount.GroupBy(x => x.beer_style)
+                      .Select(g => new { g.Key, Count = g.Count() });
+            foreach (var item in counts)
+            {
+                StyleCountViewModel styleCount = new StyleCountViewModel();
+                {
+                    styleCount.style = item.Key;
+                    styleCount.count = item.Count;
+                }
+                countStyles.Add(styleCount);
+            }
+            
+            return View(countStyles);
+        }
+        public ActionResult StyleRatings()
+        {
+            List<StyleRatingViewModel> styleRatings = new List<StyleRatingViewModel>();
+            var ratingsFromDb = db.Beer;
 
-            return View(stylesList);
+            var ratingsList = ratingsFromDb.GroupBy(x => x.beer_style)
+                .Select(g => new { style = g.Key, Avg = g.Average(s => s.rating_score) });
+
+            foreach (var style in ratingsList)
+            {
+                StyleRatingViewModel styleAndRating = new StyleRatingViewModel();
+                {
+                    styleAndRating.style = style.style;
+                    styleAndRating.rating = style.Avg;
+
+                    styleRatings.Add(styleAndRating); 
+                }
+            }
+            return View(styleRatings);
         }
 
        

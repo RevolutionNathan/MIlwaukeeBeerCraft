@@ -1,5 +1,5 @@
-﻿@model  List<MilwaukeeBeerCraft.Models.StyleCountViewModel>
-    
+﻿@model  List<MilwaukeeBeerCraft.Models.StyleRatingViewModel>
+
 <head>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -14,29 +14,29 @@
         // Set a callback to run when the Google Visualization API is loaded.
 
         google.charts.setOnLoadCallback(drawChart);
-        
+
         function drawChart() {
         // Create the data table.
             var style = @Html.Raw(Json.Encode(Model));;
             var styleName = []
-            var styleCount = []
+            var styleRating = []
             for (var i = 0; i < style.length; i++)
             {
                 styleName.push(style[i].style);
-                styleCount.push(style[i].count);
+                styleRating.push(style[i].rating);
             }
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Style Name');
-            data.addColumn('number', 'Count');
+            data.addColumn('number', 'Rating');
             for (var i = 0; i < style.length; i++)
             {
                 data.addRow([
-                styleName[i],styleCount[i],
+                styleName[i],styleRating[i],
                 ]);
             }
-        
+
             var options = {
-                'title': 'Most Popular Beer Styles',
+                'title': 'Milwaukee Beer Styles By Rating',
                 'width': 800,
                 'height': 3000,
                 'colors': ['#822c07', '#631e00']
@@ -46,7 +46,7 @@
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
-   </script>
+    </script>
 
 </head>
 
@@ -54,8 +54,7 @@
 
 <div id="row">
     
-        <div id="chart_div">  </div>
-        
-</div>
+    <div id="chart_div">
 
+</div>
 

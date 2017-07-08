@@ -5,12 +5,17 @@
 }
 
 @Html.Partial("BeersHeadImage")
+<div class="navbar navbar-inverse>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Most Popular Styles", "BeerGraphs", "Beers") </li>
+            <li>@Html.ActionLink("Style Ratings", "StyleRatings", "Beers") </li>
+        </ul>
+    </div>
+</div>
 
 <div class="col-sm-6">
     @Html.Action("StyleSelector")
-</div>
-<div class="=col-sm-6">
-    @Html.Action("BeerGraphs")
 </div>
 
 
