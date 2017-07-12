@@ -19,13 +19,15 @@ namespace MilwaukeeBeerCraft.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Your Breweries page.";
-            var breweries = new ApplicationDbContext().UntappedBrewery.ToList();
-            //List<VenueNameId> venues = untapped.CallUntappedBreweryFourSquare(breweries);
-            /*List<List<UnTappedBeer>> beerLists = */
-            var listOfBeerLists = untapped.CallUntappedBreweryByBreweryId(breweries);
-            return View(listOfBeerLists);
+            var breweries = new ApplicationDbContext().MilwaukeeBreweries.ToList();
+
+            return View(breweries);
         }
 
+        //var breweries = new ApplicationDbContext().UntappedBrewery.ToList();
+        ////List<VenueNameId> venues = untapped.CallUntappedBreweryFourSquare(breweries);
+        ///*List<List<UnTappedBeer>> beerLists = */
+        //var listOfBeerLists = untapped.CallUntappedBreweryByBreweryId(breweries);
 
     }
 }

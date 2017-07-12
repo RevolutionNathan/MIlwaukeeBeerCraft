@@ -1,7 +1,41 @@
-﻿
+﻿@model List<MilwaukeeBeerCraft.Models.MilwaukeeBreweries>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Breweries";
 }
 
 <h2>Breweries</h2>
+
+<table>
+    <thead>
+        <th> Brewery</th> 
+        <th> Address </th>
+        <th> Hours </th>
+        <th> Site </th>
+        <th> Posts </th>
+    </thead>
+    <tbody>
+        @foreach (var brewery in Model)
+        {
+            <tr>
+                <td> @brewery.Name </td>
+                <td> @brewery.description </td>
+                <td> Wednesday - Sunday 4 -11 </td>
+                <td> <a href="@brewery.url"> Website </a></td>
+                <td>
+                    @if (brewery.Posts != null)
+                    {
+                        foreach (var post in brewery.Posts)
+                        {
+                            <ul>post.Title</ul>
+                        }
+                    }
+                    else
+                    {
+                        <p> No Posts Yet!</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 

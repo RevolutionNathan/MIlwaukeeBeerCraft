@@ -16,7 +16,16 @@ namespace MilwaukeeBeerCraft.Controllers
 {
         public class BlogController: Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+        public ViewResult List()
+        {
+            // pick latest 10 posts
+            var posts = db.Post.ToList();
 
+            ViewBag.Title = "Latest Posts";
+
+            return View(posts);
+        }
 
     }
 }
@@ -24,21 +33,9 @@ namespace MilwaukeeBeerCraft.Controllers
 
 
 
-//private readonly BlogRepository _blogRespository;
 
-//public BlogController(BlogRepository blogRepository)
-//{
-//    _blogRespository = blogRepository;
-//}
 
-//public ViewResult List(int p = 1)
-//{
-//    // pick latest 10 posts
-//    var viewModel = new ListViewModel(_blogRespository, p); 
-//    ViewBag.Title = "Latest Posts";
 
-//    return View("List", viewModel);
-//}
 //public ViewResult Category(string category, int p = 1)
 //{
 //    var viewModel = new ListViewModel(_blogRespository, category, p);
